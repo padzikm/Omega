@@ -60,6 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BooksDbFactory.cs" />
+    <Compile Include="IBooksDbAsyncSession.cs" />
+    <Compile Include="IBooksDbFactory.cs" />
+    <Compile Include="IBooksDbSession.cs" />
+    <Compile Include="IBooksDbStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindsorInstaller.cs" />
   </ItemGroup>

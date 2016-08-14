@@ -1,8 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Raven.Client;
-using Raven.Client.Document;
 
 namespace Books.Database
 {
@@ -10,14 +8,7 @@ namespace Books.Database
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IDocumentStore>().UsingFactoryMethod(() =>
-            {
-                var dbStore = new DocumentStore()
-                {
-                    ConnectionStringName = "BooksDatabase",
-                }.Initialize(true);
-                return dbStore;
-            }));
+            container.Register(Component.For<IBooksDbFactory>().ImplementedBy<BooksDbFactory>());
         }
     }
 }
