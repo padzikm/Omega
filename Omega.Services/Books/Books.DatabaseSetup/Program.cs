@@ -8,13 +8,13 @@ namespace Books.DatabaseSetup
     {
         static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 1)
             {
                 Console.WriteLine("Specify database parameter");
                 return;
             }
 
-            var dbKey = args[1];
+            var dbKey = args[0];
 
             var dbName = ConfigurationManager.AppSettings[dbKey];
 
@@ -30,10 +30,16 @@ namespace Books.DatabaseSetup
                 return;
             }
 
+            Console.WriteLine("Specified database: {0}", dbName);
+
             var dbStore = new DocumentStore()
             {
                 ConnectionStringName = dbKey,
             }.Initialize();
+
+            dbStore.DatabaseCommands.GlobalAdmin.DeleteDatabase(dbName);
+
+            Console.WriteLine("Database deleted successfully");
 
             dbStore.DatabaseCommands.GlobalAdmin.EnsureDatabaseExists(dbName);
 
